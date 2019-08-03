@@ -39,12 +39,12 @@ settings:
   min: 1, // minimum value
   max: Number.MAX_SAFE_INTEGER, // maximum value
   classes: { // additional classes for each element for custom styling
-    'main': '',
-    'main__input-block': '',
-    'main__input': '',
-    'main__button': '',
-    'main__button_left': '',
-    'main__button_right': '',
+    'vue-amount-chooser': '',
+    'vue-amount-chooser__input-block': '',
+    'vue-amount-chooser__input': '',
+    'vue-amount-chooser__button': '',
+    'vue-amount-chooser__button_left': '',
+    'vue-amount-chooser__button_right': '',
   },
   buttons: { // buttons settings
     left: {

@@ -1,12 +1,12 @@
 <template>
-	<b :class="classes.main">
-		<b :class="classes.main__button + classes.main__button_left" @click="verify(amount + leftButton.amount)">
+	<b :class="classes['vue-amount-chooser']">
+		<b :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_left']" @click="verify(amount + leftButton.amount)">
 			{{ leftButton.text }}
 		</b>
-		<b :class="classes['main__input-block']">
-			<input type="text" :class="classes.main__input" v-model="input" ref="input" autofocus>
+		<b :class="classes['vue-amount-chooser__input-block']">
+			<input type="text" :class="classes['vue-amount-chooser__input']" v-model="input" ref="input" autofocus>
 		</b>
-		<b :class="classes.main__button + classes.main__button_right" @click="verify(amount + rightButton.amount)">
+		<b :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_right']" @click="verify(amount + rightButton.amount)">
 			{{ rightButton.text }}
 		</b>
 	</b>
@@ -46,8 +46,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.main {
+<style lang="scss">
+.vue-amount-chooser {
 	display: flex; justify-content: center; height: 100%;
 
 	&__button {

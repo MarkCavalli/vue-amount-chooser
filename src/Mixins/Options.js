@@ -15,12 +15,12 @@ export default {
                 min: 1,
                 max: Number.MAX_SAFE_INTEGER,
                 classes: {
-                    'main': '',
-                    'main__input-block': '',
-                    'main__input': '',
-                    'main__button': '',
-                    'main__button_left': '',
-                    'main__button_right': '',
+                    'vue-amount-chooser': '',
+                    'vue-amount-chooser__input-block': '',
+                    'vue-amount-chooser__input': '',
+                    'vue-amount-chooser__button': '',
+                    'vue-amount-chooser__button_left': '',
+                    'vue-amount-chooser__button_right': '',
                 },
                 buttons: {
                     left: {
