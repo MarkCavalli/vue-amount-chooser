@@ -51,7 +51,7 @@ export default {
 
 	&__button {
 		background-color: #555555; width: 20%; display: flex; align-items: center; justify-content: center; 
-		transition: 0.2s; cursor: pointer; color: white; font-size: 1em;
+		transition: 0.2s; cursor: pointer; color: white; font-size: 1em; user-select: none;
 
 		&:hover {
 			filter: brightness(1.1);
