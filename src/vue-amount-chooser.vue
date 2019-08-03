@@ -14,9 +14,10 @@
 
 <script>
 import dataMixin from './Mixins/Data';
+import optionsMixin from './Mixins/Options';
 
 export default {
-	mixins: [dataMixin],
+	mixins: [dataMixin, optionsMixin],
 	methods: {
 		verify(value) {
 			value = +value;
