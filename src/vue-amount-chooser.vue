@@ -50,7 +50,7 @@ export default {
 	display: flex; justify-content: center; height: 100%;
 
 	&__button {
-		background-color: #555555; width: 10%; display: flex; align-items: center; justify-content: center; 
+		background-color: #555555; width: 20%; display: flex; align-items: center; justify-content: center; 
 		transition: 0.2s; cursor: pointer; color: white; font-size: 1em;
 
 		&:hover {
@@ -58,7 +58,7 @@ export default {
 		}
 	}
 	&__input-block {
-		width: calc(100% - 20%);
+		width: calc(100% - 40%);
 	}
 	&__input {
 		height: 100%; width: 100%; background-color: white; color: #555555; font-weight: normal; border: none; text-align: center;
