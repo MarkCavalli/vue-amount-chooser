@@ -14,10 +14,9 @@
 
 <script>
 import dataMixin from './Mixins/Data';
-import optionsMixin from './Mixins/Options';
 
 export default {
-	mixins: [dataMixin, optionsMixin],
+	mixins: [dataMixin],
 	methods: {
 		verify(value) {
 			value = +value;
@@ -33,6 +32,14 @@ export default {
 		},
 		rightButton() {
 			return this.settings.buttons.right;
+		},
+		classes() {
+			const classes = this.settings.classes;
+			const obj = {};
+			for (const key in classes) {
+				obj[key] = `${key} ${classes[key]}`;
+			}
+			return obj;
 		},
 	},
 }

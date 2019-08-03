@@ -15,7 +15,28 @@
 		},
 		props: {
 			amount: { type: Number }, // v-model
-			options: { type: Object, default: {} },
+			settings: { type: Object, default: function () { return ({
+	            min: 1,
+				max: Number.MAX_SAFE_INTEGER,
+				classes: {
+					'main': '',
+					'main__input-block': '',
+					'main__input': '',
+					'main__button': '',
+					'main__button_left': '',
+					'main__button_right': '',
+				},
+				buttons: {
+					left: {
+						amount: -1,
+						text: '-',
+					},
+					right: {
+						amount: -1,
+						text: '-',
+					},
+				},
+	        }); } },
 		},
 		model: {
 			prop: 'amount',
@@ -48,65 +69,10 @@
 		},
 	};
 
-	var optionsMixin = {
-		methods: {
-			fillKeys: function fillKeys(data, prop) {
-				for (var key in data) {
-					if (!prop[key]) { continue; }
-					data[key] = prop[key];
-				}
-			},
-		},
-		computed: {
-			settings: function settings() {
-				var obj = {
-					min: 1,
-					max: Number.MAX_SAFE_INTEGER,
-					classes: {
-						'main': '',
-						'main__input-block': '',
-						'main__input': '',
-						'main__button': '',
-						'main__button_left': '',
-						'main__button_right': '',
-					},
-					buttons: {
-						left: {
-							amount: -1,
-							text: '-',
-						},
-						right: {
-							amount: -1,
-							text: '-',
-						},
-					},
-				};
-				if (this.options) {
-					if (typeof this.options.min === 'number') { obj.min = this.options.min; }
-					if (typeof this.options.max === 'number') { obj.max = this.options.max; }
-					if (this.options.classes) { this.fillKeys(obj.classes, this.options.classes); }
-					if (this.options.buttons) {
-						if (this.options.buttons.left) { this.fillKeys(obj.buttons.left, this.options.buttons.left); }
-						if (this.options.buttons.right) { this.fillKeys(obj.buttons.right, this.options.buttons.right); }
-					}
-				}
-				return obj;
-			},
-			classes: function classes() {
-				var classes = this.settings.classes;
-				var obj = {};
-				for (var key in classes) {
-					obj[key] = key + " " + (classes[key]);
-				}
-				return obj;
-			},
-		},
-	};
-
 	//
 
 	var script = {
-		mixins: [dataMixin, optionsMixin],
+		mixins: [dataMixin],
 		methods: {
 			verify: function verify(value) {
 				value = +value;
@@ -122,6 +88,14 @@
 			},
 			rightButton: function rightButton() {
 				return this.settings.buttons.right;
+			},
+			classes: function classes() {
+				var classes = this.settings.classes;
+				var obj = {};
+				for (var key in classes) {
+					obj[key] = key + " " + (classes[key]);
+				}
+				return obj;
 			},
 		},
 	};
@@ -333,11 +307,11 @@
 	  /* style */
 	  var __vue_inject_styles__ = function (inject) {
 	    if (!inject) { return }
-	    inject("data-v-b23845da_0", { source: ".main[data-v-b23845da] {\n  display: flex;\n  justify-content: center;\n}\n.main__button[data-v-b23845da] {\n  background-color: grey;\n  width: 5%;\n  height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: 0.2s;\n  cursor: pointer;\n  padding-bottom: 100%;\n  color: white;\n  font-size: 1em;\n}\n.main__button[data-v-b23845da]:hover {\n  filter: brightness(1.1);\n}\n.main__input-block[data-v-b23845da] {\n  width: calc(100% - 10%);\n}\n.main__input[data-v-b23845da] {\n  height: 100%;\n  width: 100%;\n  background-color: grey;\n  color: white;\n  font-weight: normal;\n  border: none;\n  text-align: center;\n  outline: none;\n  font-size: 1em;\n  padding: 0;\n}\n\n/*# sourceMappingURL=vue-amount-chooser.vue.map */", map: {"version":3,"sources":["D:\\npm\\vue-amount-chooser\\src\\vue-amount-chooser.vue","vue-amount-chooser.vue"],"names":[],"mappings":"AAyCA;EACA,aAAA;EAAA,uBAAA;ACvCA;ADyCA;EACA,sBAAA;EAAA,SAAA;EAAA,SAAA;EAAA,aAAA;EAAA,mBAAA;EAAA,uBAAA;EACA,gBAAA;EAAA,eAAA;EAAA,oBAAA;EAAA,YAAA;EAAA,cAAA;AC9BA;ADgCA;EACA,uBAAA;AC9BA;ADiCA;EACA,uBAAA;AC/BA;ADiCA;EACA,YAAA;EAAA,WAAA;EAAA,sBAAA;EAAA,YAAA;EAAA,mBAAA;EAAA,YAAA;EAAA,kBAAA;EACA,aAAA;EAAA,cAAA;EAAA,UAAA;ACvBA;;AAEA,iDAAiD","file":"vue-amount-chooser.vue","sourcesContent":["<template>\r\n\t<b :class=\"classes.main\">\r\n\t\t<b :class=\"classes.main__button + classes.main__button_left\" @click=\"verify(amount + leftButton.amount)\">\r\n\t\t\t{{ leftButton.text }}\r\n\t\t</b>\r\n\t\t<b :class=\"classes['main__input-block']\">\r\n\t\t\t<input type=\"text\" :class=\"classes.main__input\" v-model=\"input\" ref=\"input\" autofocus>\r\n\t\t</b>\r\n\t\t<b :class=\"classes.main__button + classes.main__button_right\" @click=\"verify(amount + rightButton.amount)\">\r\n\t\t\t{{ rightButton.text }}\r\n\t\t</b>\r\n\t</b>\r\n</template>\r\n\r\n<script>\r\nimport dataMixin from './Mixins/Data';\r\nimport optionsMixin from './Mixins/Options';\r\n\r\nexport default {\r\n\tmixins: [dataMixin, optionsMixin],\r\n\tmethods: {\r\n\t\tverify(value) {\r\n\t\t\tvalue = +value;\r\n\t\t\tif (!Number.isInteger(value)) value = 0;\r\n\t\t\tif (value < this.settings.min) value = this.settings.min;\r\n\t\t\tif (value > this.settings.max) value = this.settings.max;\r\n\t\t\tthis.emit(value);\r\n\t\t},\r\n\t},\r\n\tcomputed: {\r\n\t\tleftButton() {\r\n\t\t\treturn this.settings.buttons.left;\r\n\t\t},\r\n\t\trightButton() {\r\n\t\t\treturn this.settings.buttons.right;\r\n\t\t},\r\n\t},\r\n}\r\n</script>\r\n\r\n<style scoped lang=\"scss\">\r\n.main {\r\n\tdisplay: flex; justify-content: center;\r\n\r\n\t&__button {\r\n\t\tbackground-color: grey; width: 5%; height: 0; display: flex; align-items: center; justify-content: center; \r\n\t\ttransition: 0.2s; cursor: pointer; padding-bottom: 100%; color: white; font-size: 1em;\r\n\r\n\t\t&:hover {\r\n\t\t\tfilter: brightness(1.1);\r\n\t\t}\r\n\t}\r\n\t&__input-block {\r\n\t\twidth: calc(100% - 10%);\r\n\t}\r\n\t&__input {\r\n\t\theight: 100%; width: 100%; background-color: grey; color: white; font-weight: normal; border: none; text-align: center;\r\n    \toutline: none; font-size: 1em; padding: 0;\r\n\t}\r\n}\r\n</style>",".main {\n  display: flex;\n  justify-content: center;\n}\n.main__button {\n  background-color: grey;\n  width: 5%;\n  height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: 0.2s;\n  cursor: pointer;\n  padding-bottom: 100%;\n  color: white;\n  font-size: 1em;\n}\n.main__button:hover {\n  filter: brightness(1.1);\n}\n.main__input-block {\n  width: calc(100% - 10%);\n}\n.main__input {\n  height: 100%;\n  width: 100%;\n  background-color: grey;\n  color: white;\n  font-weight: normal;\n  border: none;\n  text-align: center;\n  outline: none;\n  font-size: 1em;\n  padding: 0;\n}\n\n/*# sourceMappingURL=vue-amount-chooser.vue.map */"]}, media: undefined });
+	    inject("data-v-13952379_0", { source: ".main[data-v-13952379] {\n  display: flex;\n  justify-content: center;\n}\n.main__button[data-v-13952379] {\n  background-color: grey;\n  width: 5%;\n  height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: 0.2s;\n  cursor: pointer;\n  padding-bottom: 100%;\n  color: white;\n  font-size: 1em;\n}\n.main__button[data-v-13952379]:hover {\n  filter: brightness(1.1);\n}\n.main__input-block[data-v-13952379] {\n  width: calc(100% - 10%);\n}\n.main__input[data-v-13952379] {\n  height: 100%;\n  width: 100%;\n  background-color: grey;\n  color: white;\n  font-weight: normal;\n  border: none;\n  text-align: center;\n  outline: none;\n  font-size: 1em;\n  padding: 0;\n}\n\n/*# sourceMappingURL=vue-amount-chooser.vue.map */", map: {"version":3,"sources":["D:\\npm\\vue-amount-chooser\\src\\vue-amount-chooser.vue","vue-amount-chooser.vue"],"names":[],"mappings":"AAgDA;EACA,aAAA;EAAA,uBAAA;AC9CA;ADgDA;EACA,sBAAA;EAAA,SAAA;EAAA,SAAA;EAAA,aAAA;EAAA,mBAAA;EAAA,uBAAA;EACA,gBAAA;EAAA,eAAA;EAAA,oBAAA;EAAA,YAAA;EAAA,cAAA;ACrCA;ADuCA;EACA,uBAAA;ACrCA;ADwCA;EACA,uBAAA;ACtCA;ADwCA;EACA,YAAA;EAAA,WAAA;EAAA,sBAAA;EAAA,YAAA;EAAA,mBAAA;EAAA,YAAA;EAAA,kBAAA;EACA,aAAA;EAAA,cAAA;EAAA,UAAA;AC9BA;;AAEA,iDAAiD","file":"vue-amount-chooser.vue","sourcesContent":["<template>\r\n\t<b :class=\"classes.main\">\r\n\t\t<b :class=\"classes.main__button + classes.main__button_left\" @click=\"verify(amount + leftButton.amount)\">\r\n\t\t\t{{ leftButton.text }}\r\n\t\t</b>\r\n\t\t<b :class=\"classes['main__input-block']\">\r\n\t\t\t<input type=\"text\" :class=\"classes.main__input\" v-model=\"input\" ref=\"input\" autofocus>\r\n\t\t</b>\r\n\t\t<b :class=\"classes.main__button + classes.main__button_right\" @click=\"verify(amount + rightButton.amount)\">\r\n\t\t\t{{ rightButton.text }}\r\n\t\t</b>\r\n\t</b>\r\n</template>\r\n\r\n<script>\r\nimport dataMixin from './Mixins/Data';\r\n\r\nexport default {\r\n\tmixins: [dataMixin],\r\n\tmethods: {\r\n\t\tverify(value) {\r\n\t\t\tvalue = +value;\r\n\t\t\tif (!Number.isInteger(value)) value = 0;\r\n\t\t\tif (value < this.settings.min) value = this.settings.min;\r\n\t\t\tif (value > this.settings.max) value = this.settings.max;\r\n\t\t\tthis.emit(value);\r\n\t\t},\r\n\t},\r\n\tcomputed: {\r\n\t\tleftButton() {\r\n\t\t\treturn this.settings.buttons.left;\r\n\t\t},\r\n\t\trightButton() {\r\n\t\t\treturn this.settings.buttons.right;\r\n\t\t},\r\n\t\tclasses() {\r\n\t\t\tconst classes = this.settings.classes;\r\n\t\t\tconst obj = {};\r\n\t\t\tfor (const key in classes) {\r\n\t\t\t\tobj[key] = `${key} ${classes[key]}`;\r\n\t\t\t}\r\n\t\t\treturn obj;\r\n\t\t},\r\n\t},\r\n}\r\n</script>\r\n\r\n<style scoped lang=\"scss\">\r\n.main {\r\n\tdisplay: flex; justify-content: center;\r\n\r\n\t&__button {\r\n\t\tbackground-color: grey; width: 5%; height: 0; display: flex; align-items: center; justify-content: center; \r\n\t\ttransition: 0.2s; cursor: pointer; padding-bottom: 100%; color: white; font-size: 1em;\r\n\r\n\t\t&:hover {\r\n\t\t\tfilter: brightness(1.1);\r\n\t\t}\r\n\t}\r\n\t&__input-block {\r\n\t\twidth: calc(100% - 10%);\r\n\t}\r\n\t&__input {\r\n\t\theight: 100%; width: 100%; background-color: grey; color: white; font-weight: normal; border: none; text-align: center;\r\n    \toutline: none; font-size: 1em; padding: 0;\r\n\t}\r\n}\r\n</style>",".main {\n  display: flex;\n  justify-content: center;\n}\n.main__button {\n  background-color: grey;\n  width: 5%;\n  height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: 0.2s;\n  cursor: pointer;\n  padding-bottom: 100%;\n  color: white;\n  font-size: 1em;\n}\n.main__button:hover {\n  filter: brightness(1.1);\n}\n.main__input-block {\n  width: calc(100% - 10%);\n}\n.main__input {\n  height: 100%;\n  width: 100%;\n  background-color: grey;\n  color: white;\n  font-weight: normal;\n  border: none;\n  text-align: center;\n  outline: none;\n  font-size: 1em;\n  padding: 0;\n}\n\n/*# sourceMappingURL=vue-amount-chooser.vue.map */"]}, media: undefined });
 
 	  };
 	  /* scoped */
-	  var __vue_scope_id__ = "data-v-b23845da";
+	  var __vue_scope_id__ = "data-v-13952379";
 	  /* module identifier */
 	  var __vue_module_identifier__ = undefined;
 	  /* functional template */
