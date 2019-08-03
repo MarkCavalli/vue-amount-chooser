@@ -28,8 +28,8 @@ export default {
 					text: '-',
 				},
 				right: {
-					amount: -1,
-					text: '-',
+					amount: 1,
+					text: '+',
 				},
 			},
         }) },

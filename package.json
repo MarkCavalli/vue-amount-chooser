@@ -1,6 +1,6 @@
 {
 	"name": "vue-amount-chooser",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "dist/vue-amount-chooser.umd.js",
 	"module": "dist/vue-amount-chooser.esm.js",

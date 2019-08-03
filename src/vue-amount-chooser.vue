@@ -47,22 +47,22 @@ export default {
 
 <style scoped lang="scss">
 .main {
-	display: flex; justify-content: center;
+	display: flex; justify-content: center; height: 100%;
 
 	&__button {
-		background-color: grey; width: 5%; height: 0; display: flex; align-items: center; justify-content: center; 
-		transition: 0.2s; cursor: pointer; padding-bottom: 100%; color: white; font-size: 1em;
+		background-color: #555555; width: 10%; display: flex; align-items: center; justify-content: center; 
+		transition: 0.2s; cursor: pointer; color: white; font-size: 1em;
 
 		&:hover {
 			filter: brightness(1.1);
 		}
 	}
 	&__input-block {
-		width: calc(100% - 10%);
+		width: calc(100% - 20%);
 	}
 	&__input {
-		height: 100%; width: 100%; background-color: grey; color: white; font-weight: normal; border: none; text-align: center;
-    	outline: none; font-size: 1em; padding: 0;
+		height: 100%; width: 100%; background-color: white; color: #555555; font-weight: normal; border: none; text-align: center;
+    	outline: none; font-size: 1em; padding: 0; font-family: inherit;
 	}
 }
 </style>
