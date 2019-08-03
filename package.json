@@ -1,0 +1,35 @@
+{
+	"name": "vue-amount-chooser",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/vue-amount-chooser.umd.js",
+	"module": "dist/vue-amount-chooser.esm.js",
+	"unpkg": "dist/vue-amount-chooser.min.js",
+	"browser": {
+		"./sfc": "src/vue-amount-chooser.vue"
+	},
+	"scripts": {
+		"build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+		"build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-amount-chooser.umd.js",
+		"build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-amount-chooser.esm.js",
+		"build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-amount-chooser.min.js"
+	},
+	"devDependencies": {
+		"rollup": "^1.17.0",
+		"rollup-plugin-buble": "^0.19.8",
+		"rollup-plugin-commonjs": "^10.0.1",
+		"rollup-plugin-vue": "^5.0.1",
+		"vue": "^2.6.10",
+		"vue-template-compiler": "^2.6.10"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MarkCavalli/vue-amount-chooser.git"
+	},
+	"author": "Mark Cavalli",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/MarkCavalli/vue-amount-chooser/issues"
+	},
+	"homepage": "https://github.com/MarkCavalli/vue-amount-chooser#readme"
+}
