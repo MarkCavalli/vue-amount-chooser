@@ -44,5 +44,10 @@ export default {
 				this.inputChanged(newVal)
 			}
 		},
+		'amount': {
+			handler(newVal, oldVal) {
+				this.input = newVal;
+			}
+		},
 	},
 }

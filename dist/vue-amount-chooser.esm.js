@@ -44,6 +44,11 @@ var dataMixin = {
 				this.inputChanged(newVal);
 			}
 		},
+		'amount': {
+			handler: function handler(newVal, oldVal) {
+				this.input = newVal;
+			}
+		},
 	},
 };
 
