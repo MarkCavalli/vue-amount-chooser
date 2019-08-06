@@ -1,15 +1,15 @@
 <template>
-	<b :class="classes['vue-amount-chooser']">
-		<b :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_left']" @click="verify(amount + leftButton.amount)">
+	<div :class="classes['vue-amount-chooser']">
+		<div :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_left']" @click="verify(amount + leftButton.amount)">
 			{{ leftButton.text }}
-		</b>
-		<b :class="classes['vue-amount-chooser__input-block']">
+		</div>
+		<div :class="classes['vue-amount-chooser__input-block']">
 			<input type="text" :class="classes['vue-amount-chooser__input']" v-model="input" ref="input" autofocus>
-		</b>
-		<b :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_right']" @click="verify(amount + rightButton.amount)">
+		</div>
+		<div :class="classes['vue-amount-chooser__button'] + classes['vue-amount-chooser__button_right']" @click="verify(amount + rightButton.amount)">
 			{{ rightButton.text }}
-		</b>
-	</b>
+		</div>
+	</div>
 </template>
 
 <script>
